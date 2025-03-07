@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>周乐燊 - 个人简历</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+
+        body {
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.8;
+            padding-top: 80px;
+        }
+
+        /* 导航栏 */
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            transition: background 0.3s;
+        }
+
+        .nav:hover {
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .nav-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        .nav-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid #e0e0e0;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .nav-avatar:hover {
+            transform: scale(1.05);
+        }
+
+        /* 主要内容容器 */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* 个人信息区 */
+        .profile-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .profile-header h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #7f8c8d;
+            padding: 0.5rem 1rem;
+            background: rgba(236, 240, 241, 0.5);
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            background: #ecf0f1;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 简历卡片 */
+        .resume-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .resume-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 标题样式 */
+        .section-title {
+            color: #34495e;
+            border-left: 4px solid #3498db;
+            padding-left: 1rem;
+            margin: 2.5rem 0 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        /* 时间轴 */
+        .timeline {
+            border-left: 2px solid #ecf0f1;
+            padding-left: 2rem;
+            margin-left: 1rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+            padding: 1rem;
+            background: rgba(236, 240, 241, 0.3);
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .timeline-item:hover {
+            background: rgba(236, 240, 241, 0.5);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.35rem;
+            top: 1.2rem;
+            width: 12px;
+            height: 12px;
+            background: #3498db;
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        .timeline-item h3 {
+            color: #2c3e50;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .timeline-item ul {
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        /* 荣誉列表 */
+        .honor-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .honor-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(236, 240, 241, 0.3);
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .honor-item:hover {
+            background: rgba(236, 240, 241, 0.5);
+        }
+
+        /* 技能网格 */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-item {
+            background: rgba(236, 240, 241, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            transition: background 0.3s;
+        }
+
+        .skill-item:hover {
+            background: rgba(236, 240, 241, 0.5);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .nav {
+                padding: 0.8rem 1.5rem;
+            }
+
+            .nav-avatar {
+                width: 42px;
+                height: 42px;
+            }
+
+            .profile-header h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+                margin: 2rem 0 1rem;
+            }
+
+            .resume-card {
+                padding: 1.5rem;
+            }
+
+            .contact-item {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contact-info {
+                gap: 1rem;
+            }
+
+            .timeline-item::before {
+                left: -2.1rem;
+            }
+        }
+
+        /* 新增的顶部头像样式 */
+        .top-avatar {
+            width: 150px; /* 可根据需要调整头像大小 */
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #e0e0e0;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto 1rem; /* 水平居中并添加底部间距 */
+            transition: transform 0.3s;
+        }
+
+        .top-avatar:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="nav">
+        <span class="nav-title">简历</span>
+    </nav>
+
+    <div class="container">
+        <header class="profile-header">
+            <img src="C:\Users\Keven-Zhou\OneDrive\个人证件照等文件\个人照片\3de6be39c35cfdb2f9c627ea039c2a9.png" alt="个人头像" class="top-avatar">
+            <h1>周乐燊</h1>
+            <h3>目标岗位：前端工程师</h3>
+            <div class="contact-info">
+                <div class="contact-item">📧 2529807676@qq.com</div>
+                <div class="contact-item" id="phone">📱 点击查看</div>
+                <div class="contact-item">🏠 广东省广州市</div>
+            </div>
+        </header>
+
+        <!-- 教育背景 -->
+        <h2 class="section-title">教育背景</h2>
+        <div class="resume-card">
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>2023.09 - 2026.06 | 广东轻工职业技术大学</h3>
+                    <p><strong>软件技术 · 全日制专科</strong></p>
+                    <ul>
+                        <li>主修课程：C语言程序设计、Java高级开发、Web框架技术、数据结构与算法，计算机网络，Linux操作系统</li>
+                        <li>GPA：2.7/5.0</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 技术能力 -->
+        <h2 class="section-title">技术能力</h2>
+        <div class="resume-card">
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <h3>编程语言</h3>
+                    <p>Java · C/C++ · Python · JavaScript</p>
+                </div>
+                <div class="skill-item">
+                    <h3>前端开发</h3>
+                    <p>HTML5 · CSS3 · Vue.js</p>
+                </div>
+                <div class="skill-item">
+                    <h3>其他技能</h3>
+                    <p>MySQL · Git · Linux · Office</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 项目经历 -->
+        <h2 class="section-title">项目经历</h2>
+        <div class="resume-card">
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>2024.12 - 2025.01 | 密码管理app</h3>
+                    <ul>
+                        <li>使用java语言开发，本地数据库使用SQLite,云同步采用Firebase</li>
+                        <li>密码管理器采用AES-256加密算法对存储的密码进行加密</li>
+                    </ul>
+                </div>
+                <div class="timeline-item">
+                    <h3>2024.12 - 2025.01 | 妈妈的菜谱助手</h3>
+                    <ul>
+                        <li>使用javaweb + jsp+html</li>
+                        <li>实现菜谱记录、随机更换菜品、菜品增删改查等核心功能</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 荣誉证书 -->
+        <h2 class="section-title">荣誉证书</h2>
+        <div class="resume-card">
+            <div class="honor-list">
+                <div class="honor-item">
+                    <span>🏆</span>
+                    <div>
+                        <h3>蓝桥杯B组省二等奖</h3>
+                        <p>全国软件和信息技术专业人才大赛 | 2024</p>
+                    </div>
+                </div>
+                <div class="honor-item">
+                    <span>💻</span>
+                    <div>
+                        <h3>全国计算机一级证书</h3>
+                        <p>MS Office2021</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 增强隐私保护
+        let phoneClicked = false;
+        document.getElementById('phone').addEventListener('click', function () {
+            if (!phoneClicked) {
+                this.innerHTML = '📱 186-2000-7210';
+                phoneClicked = true;
+                setTimeout(() => {
+                    this.innerHTML = '📱 点击查看';
+                    phoneClicked = false;
+                }, 5000);
+            }
+        });
+
+        // 增强卡片动画
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.resume-card').forEach(card => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
+            observer.observe(card);
+        });
+
+        // 打印优化
+        window.addEventListener('beforeprint', () => {
+            document.querySelector('.nav').style.display = 'none';
+            document.body.style.paddingTop = '0';
+        });
+    </script>
+</body>
+
+</html>
